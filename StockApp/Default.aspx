@@ -1,10 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="StockApp.Default" %>
-
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Finntastic</title>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -24,8 +22,6 @@
             <p>High price of the day: <asp:Label ID="HighPrice" runat="server"></asp:Label></p>
             <p>Low price of the day: <asp:Label ID="LowPrice" runat="server"></asp:Label></p>
             <br />
-            
-            
         </div>
     </form>
 </body>

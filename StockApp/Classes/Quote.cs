@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Newtonsoft.Json.Linq;
-using StockApp.Classes;
+﻿
 
 namespace StockApp.Classes
 {
 	public class Quote
 	{
-		private FinnHubQuoteResult result;
+		private FinnHubQuoteResult quote;
 		private FinnHubCompanyResult company;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="result">FinnHub API Result</param>
+		/// <param name="quote">FinnHub Quote Result</param>
 		/// <param name="company">FinnHub Company Result</param>
-		public Quote(FinnHubQuoteResult result, FinnHubCompanyResult company)
+		public Quote(FinnHubQuoteResult quote, FinnHubCompanyResult company)
 		{
-			this.result = result;
+			this.quote = quote;
 			this.company = company;
 		}
 
@@ -30,17 +25,17 @@ namespace StockApp.Classes
 
 		public string GetCurrentPrice()
 		{
-			return result.c.ToString();
+			return quote.c.ToString();
 		}
 
 		public string GetHighPrice()
 		{
-			return result.h.ToString();
+			return quote.h.ToString();
 		}
 
 		public string GetLowPrice()
 		{
-			return result.l.ToString();
+			return quote.l.ToString();
 		}
 	}
 }

@@ -1,10 +1,5 @@
 ﻿using StockApp.Classes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Newtonsoft.Json;
 
 namespace StockApp
@@ -18,11 +13,11 @@ namespace StockApp
 
 		protected void Submit_Click(object sender, EventArgs e)
 		{
-			var companySymbol = ListingCompany.Text;
-			var serviceRequest = new ServiceRequest(companySymbol);
-			var company = JsonConvert.DeserializeObject<FinnHubCompanyResult>(serviceRequest.GetCompanyInformation());
-			var results = JsonConvert.DeserializeObject<FinnHubQuoteResult>(serviceRequest.GetQuotePrices());
-			Quote quote = new Quote(results, company); 
+			string companySymbol = ListingCompany.Text;
+			ServiceRequest serviceRequest = new ServiceRequest(companySymbol);
+			FinnHubCompanyResult companyRes = JsonConvert.DeserializeObject<FinnHubCompanyResult>(serviceRequest.GetCompanyInformation());
+			FinnHubQuoteResult quoteRes = JsonConvert.DeserializeObject<FinnHubQuoteResult>(serviceRequest.GetQuotePrices());
+			Quote quote = new Quote(quoteRes, companyRes); 
 
 			CurrentPrice.Text = quote.GetCurrentPrice();
 			HighPrice.Text = quote.GetHighPrice();
@@ -33,5 +28,4 @@ namespace StockApp
 
 	//TODO:
 	//add companys to a watch list and update real time.
-
 }

@@ -1,26 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-//using System.Net.Http;
-using System.Threading.Tasks;
-using System.Net.Http;
 using System.Net;
 using System.IO;
-using StockApp.Classes;
 using Newtonsoft.Json.Linq;
+using System.Configuration;
 
 namespace StockApp.Classes
 {
-
-	//Calls API and returns Data.
-
+	/// <summary>
+	/// Service for FinnHub API. See https://finnhub.io/docs/ for details.
+	/// </summary>
 	public partial class ServiceRequest
 	{
-
-		private string tokenId = "bu7044748v6rghl7nkng";
-		private string companySymbol;
-		private string baseUrl = "https://finnhub.io/api/v1/";
+		private readonly string companySymbol;
+		private readonly string tokenId = ConfigurationManager.AppSettings["FinnHubApiToken"];
+		private readonly string baseUrl = ConfigurationManager.AppSettings["FinnHubBaseUrl"];
 
 		public ServiceRequest(string companySymbol)
 		{
@@ -52,12 +45,10 @@ namespace StockApp.Classes
 				string data = JObject.Parse(response).ToString();
 				return data;
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-
-				throw;
+				throw new Exception("Error submitting FinnHub HTTP Request", ex);
 			}
 		}
-
 	}
 }
