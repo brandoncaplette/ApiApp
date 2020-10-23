@@ -85,6 +85,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Company.cs" />
     <Compile Include="Classes\FinnHubCompanyResult.cs" />
     <Compile Include="Classes\FinnHubQuoteResult.cs" />
     <Compile Include="Interfaces\IFinnHubCompanyResult.cs" />

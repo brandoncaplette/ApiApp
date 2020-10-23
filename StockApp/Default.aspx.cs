@@ -15,14 +15,15 @@ namespace StockApp
 		{
 			string companySymbol = ListingCompany.Text;
 			ServiceRequest serviceRequest = new ServiceRequest(companySymbol);
-			FinnHubCompanyResult companyRes = JsonConvert.DeserializeObject<FinnHubCompanyResult>(serviceRequest.GetCompanyInformation());
-			FinnHubQuoteResult quoteRes = JsonConvert.DeserializeObject<FinnHubQuoteResult>(serviceRequest.GetQuotePrices());
-			Quote quote = new Quote(quoteRes, companyRes); 
-
-			CurrentPrice.Text = quote.GetCurrentPrice();
-			HighPrice.Text = quote.GetHighPrice();
-			LowPrice.Text = quote.GetLowPrice();
-			NameLabel.Text = quote.GetCompanyName();
+			FinnHubCompanyResult companyResult = JsonConvert.DeserializeObject<FinnHubCompanyResult>(serviceRequest.GetCompanyInformation());
+			FinnHubQuoteResult quoteResult = JsonConvert.DeserializeObject<FinnHubQuoteResult>(serviceRequest.GetQuotePrices());
+			Quote quote = new Quote(quoteResult);
+			Company company = new Company(companyResult, quote);
+			 
+			CurrentPrice.Text = company.quote.GetCurrentPrice().ToString();
+			HighPrice.Text = company.quote.GetHighPrice().ToString();
+			LowPrice.Text = company.quote.GetLowPrice().ToString();
+			NameLabel.Text = company.GetCompanyName();
 		}
 	}
 

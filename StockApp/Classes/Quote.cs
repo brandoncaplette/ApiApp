@@ -4,38 +4,30 @@ namespace StockApp.Classes
 {
 	public class Quote
 	{
-		private FinnHubQuoteResult quote;
-		private FinnHubCompanyResult company;
+		private FinnHubQuoteResult quoteResult;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="quote">FinnHub Quote Result</param>
-		/// <param name="company">FinnHub Company Result</param>
-		public Quote(FinnHubQuoteResult quote, FinnHubCompanyResult company)
+		/// <param name="quoteResult">FinnHub Quote Result</param>
+		public Quote(FinnHubQuoteResult quoteResult)
 		{
-			this.quote = quote;
-			this.company = company;
+			this.quoteResult = quoteResult;
 		}
 
-		public string GetCompanyName ()
+		public float GetCurrentPrice()
 		{
-			return company.name;
+			return quoteResult.c;
 		}
 
-		public string GetCurrentPrice()
+		public float GetHighPrice()
 		{
-			return quote.c.ToString();
+			return quoteResult.h;
 		}
 
-		public string GetHighPrice()
+		public float GetLowPrice()
 		{
-			return quote.h.ToString();
-		}
-
-		public string GetLowPrice()
-		{
-			return quote.l.ToString();
+			return quoteResult.l;
 		}
 	}
 }
