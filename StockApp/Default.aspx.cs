@@ -17,16 +17,19 @@ namespace StockApp
 			ServiceRequest serviceRequest = new ServiceRequest(companySymbol);
 			FinnHubCompanyResult companyResult = JsonConvert.DeserializeObject<FinnHubCompanyResult>(serviceRequest.GetCompanyInformation());
 			FinnHubQuoteResult quoteResult = JsonConvert.DeserializeObject<FinnHubQuoteResult>(serviceRequest.GetQuotePrices());
+			// FinnHubNewsResult newsResult = JsonConvert.DeserializeObject<FinnHubNewsResult>(serviceRequest.GetCompanyNews());
 			Quote quote = new Quote(quoteResult);
+			// News news = new News(newsResult);
 			Company company = new Company(companyResult, quote);
-			 
+			// Company company = new Company(companyResult, quote, news);
+
 			CurrentPrice.Text = company.quote.GetCurrentPrice().ToString();
 			HighPrice.Text = company.quote.GetHighPrice().ToString();
 			LowPrice.Text = company.quote.GetLowPrice().ToString();
 			NameLabel.Text = company.GetCompanyName();
+			// TODO: display the selected companys news.
 		}
 	}
 
-	//TODO:
-	//add companys to a watch list and update real time.
+	// TODO: add companies to a watch list and update real time.
 }
