@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using StockApp.Interfaces;
 
 namespace StockApp.Classes
 {
@@ -13,6 +10,5 @@ namespace StockApp.Classes
 		public float o { get; set; }
 		public float pc { get; set; }
 		public float t { get; set; }
-
 	}
 }

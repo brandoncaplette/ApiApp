@@ -1,10 +1,5 @@
 ﻿using StockApp.Classes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Newtonsoft.Json;
 
 namespace StockApp
@@ -18,20 +13,23 @@ namespace StockApp
 
 		protected void Submit_Click(object sender, EventArgs e)
 		{
-			var companySymbol = ListingCompany.Text;
-			var serviceRequest = new ServiceRequest(companySymbol);
-			var company = JsonConvert.DeserializeObject<FinnHubCompanyResult>(serviceRequest.GetCompanyInformation());
-			var results = JsonConvert.DeserializeObject<FinnHubQuoteResult>(serviceRequest.GetQuotePrices());
-			Quote quote = new Quote(results, company); 
+			string companySymbol = ListingCompany.Text;
+			ServiceRequest serviceRequest = new ServiceRequest(companySymbol);
+			FinnHubCompanyResult companyResult = JsonConvert.DeserializeObject<FinnHubCompanyResult>(serviceRequest.GetCompanyInformation());
+			FinnHubQuoteResult quoteResult = JsonConvert.DeserializeObject<FinnHubQuoteResult>(serviceRequest.GetQuotePrices());
+			// FinnHubNewsResult newsResult = JsonConvert.DeserializeObject<FinnHubNewsResult>(serviceRequest.GetCompanyNews());
+			Quote quote = new Quote(quoteResult);
+			// News news = new News(newsResult);
+			Company company = new Company(companyResult, quote);
+			// Company company = new Company(companyResult, quote, news);
 
-			CurrentPrice.Text = quote.GetCurrentPrice();
-			HighPrice.Text = quote.GetHighPrice();
-			LowPrice.Text = quote.GetLowPrice();
-			NameLabel.Text = quote.GetCompanyName();
+			CurrentPrice.Text = company.quote.GetCurrentPrice().ToString();
+			HighPrice.Text = company.quote.GetHighPrice().ToString();
+			LowPrice.Text = company.quote.GetLowPrice().ToString();
+			NameLabel.Text = company.GetCompanyName();
+			// TODO: display the selected companys news.
 		}
 	}
 
-	//TODO:
-	//add companys to a watch list and update real time.
-
+	// TODO: add companies to a watch list and update real time.
 }

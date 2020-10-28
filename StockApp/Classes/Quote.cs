@@ -1,46 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Newtonsoft.Json.Linq;
-using StockApp.Classes;
+﻿
 
 namespace StockApp.Classes
 {
 	public class Quote
 	{
-		private FinnHubQuoteResult result;
-		private FinnHubCompanyResult company;
+		private FinnHubQuoteResult quoteResult;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="result">FinnHub API Result</param>
-		/// <param name="company">FinnHub Company Result</param>
-		public Quote(FinnHubQuoteResult result, FinnHubCompanyResult company)
+		/// <param name="quoteResult">FinnHub Quote Result</param>
+		public Quote(FinnHubQuoteResult quoteResult)
 		{
-			this.result = result;
-			this.company = company;
+			this.quoteResult = quoteResult;
 		}
 
-		public string GetCompanyName ()
+		public float GetCurrentPrice()
 		{
-			return company.name;
+			return quoteResult.c;
 		}
 
-		public string GetCurrentPrice()
+		public float GetHighPrice()
 		{
-			return result.c.ToString();
+			return quoteResult.h;
 		}
 
-		public string GetHighPrice()
+		public float GetLowPrice()
 		{
-			return result.h.ToString();
-		}
-
-		public string GetLowPrice()
-		{
-			return result.l.ToString();
+			return quoteResult.l;
 		}
 	}
 }
